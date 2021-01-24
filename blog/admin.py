@@ -1,0 +1,18 @@
+from django.contrib import admin
+
+# Register your models here.
+from . import models
+from mptt.admin import MPTTModelAdmin
+
+
+@admin.register(models.Post)
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('title', 'id', 'status', 'slug', 'author')
+    prepopulated_fields = {'slug': ('title',), }
+
+
+admin.site.register(models.Category)
+
+admin.site.register(models.Vote)
+
+admin.site.register(models.Comment, MPTTModelAdmin)
